@@ -57,7 +57,6 @@ const ToDoList = () => {
                   className='estilobotoningresar'
                   style={{margin:'1em 0'}}
                   onClick={()=>{agregarNota(); onReset()}}
-                  onReset={datos}
                 >
                     Ingresar
                 </Button>
