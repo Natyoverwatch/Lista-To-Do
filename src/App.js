@@ -26,45 +26,51 @@ const ToDoList = () => {
     setNotes(newNote)
   };
 
-  const CambiarNota =(id) =>{
-    
+  const [form] = Form.useForm();
+  const onReset = () => {
+    form.resetFields();
   };
 
   return(
       <>
+        <Row>
+          <Col>
+          Actualizar notas
           <Form
-              name="basic"
-              layout="vertical"
-              style={{ maxWidth: 600 }}
-              initialValues={{ remember: true }}
-              autoComplete="off"
-          >
+            form={form}
+            name="basic"
+            layout="vertical"
+            style={{ maxWidth: 600 }}
+            initialValues={{ remember: true }}
+            autoComplete="off"
+            >
               <Form.Item
               name="Usuario"
               rules={[{ required: true, message: 'Por favor diligencie su usuario!' }]}
               >
-              <Input onClick={() => contador(1)} value={datos} onChange={e => setDatos(e.target.value)} />
+                <Input onClick={() => contador(1)} value={datos} onChange={e => setDatos(e.target.value)} />
               </Form.Item>
               <Form.Item >
                 <Button 
-                    type='primary'
-                    htmlType="submit"
-                    className='estilobotoningresar'
-                    style={{margin:'1em 0'}}
-                    onClick={agregarNota}
+                  type='primary'
+                  htmlType="button"
+                  className='estilobotoningresar'
+                  style={{margin:'1em 0'}}
+                  onClick={()=>{agregarNota(); onReset()}}
+                  onReset={datos}
                 >
                     Ingresar
                 </Button>
-            </Form.Item>
+              </Form.Item>
           </Form>
-          {/*<button onClick={agregarNota}> Agregar a la lista </button>*/}
-          <Row >
-              {notes.map((nota) => (
-                  <Col key={nota.id} onClick={()=> removerNota(nota.id)} className='loginform'>
-                      {nota.name}
-                  </Col>
-              ))}
-          </Row>
+          </Col>
+        
+            {notes.map((nota) => (
+                <Col key={nota.id} onClick={()=> removerNota(nota.id)} className='loginform'>
+                  {nota.name}
+                </Col>
+            ))}
+        </Row>
           
       </>
   )
@@ -73,7 +79,6 @@ const ToDoList = () => {
 function ToDo() {
   return(
     <div className='container'>
-      Actualizar notas
       <ToDoList/>
     </div>
   )
