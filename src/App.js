@@ -7,6 +7,7 @@ const ToDoList = () => {
   const [datos, setDatos] = useState([]);
   const [notes, setNotes] = useState([]);
   let [counter, setCounter] = React.useState(0);
+  const [form] = Form.useForm();
   //destructurng
   //React.useState => [value, function to update the value];
   const contador = (value) => {
@@ -26,16 +27,15 @@ const ToDoList = () => {
     setNotes(newNote)
   };
 
-  const [form] = Form.useForm();
   const onReset = () => {
     form.resetFields();
   };
 
   return(
       <>
-        <Row>
-          <Col>
-          Actualizar notas
+        <Row style={{display:'flex', justifyContent:'center', padding: '0 1em'}}>
+          <Col className='loginformbasic' xs={{span:20, offset:2 }} md={{span:10, offset:3 }} lg={{span:6, offset:2 }} style={{margin:'0 2em'}}>
+          <h1 style={{color: 'blue',display:'flex', alignContent:'center', justifyContent:'center'}}>Actualizar notas </h1>
           <Form
             form={form}
             name="basic"
@@ -48,15 +48,15 @@ const ToDoList = () => {
               name="Usuario"
               rules={[{ required: true, message: 'Por favor diligencie su usuario!' }]}
               >
-                <Input onClick={() => contador(1)} value={datos} onChange={e => setDatos(e.target.value)} />
+                <Input value={datos} onChange={e => setDatos(e.target.value)} />
               </Form.Item>
               <Form.Item >
                 <Button 
                   type='primary'
-                  htmlType="button"
+                  htmlType="submit"
                   className='estilobotoningresar'
                   style={{margin:'1em 0'}}
-                  onClick={()=>{agregarNota(); onReset()}}
+                  onClick={()=>{agregarNota(); onReset(); contador(1)}}
                 >
                     Ingresar
                 </Button>
