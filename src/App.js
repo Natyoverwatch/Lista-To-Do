@@ -20,6 +20,7 @@ const ToDoList = () => {
           id: counter,
       }
       setNotes([...notes, newNote])
+      setDatos('') //para que no siga anotando el ultimo valor
   };
 
   const removerNota =(id) =>{
@@ -33,14 +34,15 @@ const ToDoList = () => {
 
   return(
       <>
-        <Row style={{display:'flex', justifyContent:'center', padding: '0 1em'}}>
-          <Col className='loginformbasic' xs={{span:20, offset:2 }} md={{span:10, offset:3 }} lg={{span:6, offset:2 }} style={{margin:'0 2em'}}>
-          <h1 style={{color: 'blue',display:'flex', alignContent:'center', justifyContent:'center'}}>Actualizar notas </h1>
+        <Row
+          className='styledRow'
+        >
+          <Col className='styledCol' xs={{span:20, offset:2 }} md={{span:10, offset:3 }} lg={{span:6, offset:2 }} style={{}}>
+          <h1>Actualizar notas </h1>
           <Form
             form={form}
             name="basic"
             layout="vertical"
-            style={{ maxWidth: 600 }}
             initialValues={{ remember: true }}
             autoComplete="off"
             >
@@ -50,12 +52,11 @@ const ToDoList = () => {
               >
                 <Input value={datos} onChange={e => setDatos(e.target.value)} />
               </Form.Item>
-              <Form.Item >
+              <Form.Item>
                 <Button 
                   type='primary'
                   htmlType="submit"
                   className='estilobotoningresar'
-                  style={{margin:'1em 0'}}
                   onClick={()=>{agregarNota(); onReset(); contador(1)}}
                 >
                     Ingresar
@@ -63,10 +64,9 @@ const ToDoList = () => {
               </Form.Item>
           </Form>
           </Col>
-        
             {notes.map((nota) => (
-                <Col key={nota.id} onClick={()=> removerNota(nota.id)} className='loginform'>
-                  {nota.name}
+                <Col key={nota.id} onClick={()=> removerNota(nota.id)} className='boxAdd'>
+                  <p>{nota.name}</p>
                 </Col>
             ))}
         </Row>
