@@ -64,8 +64,8 @@ const ToDoList = () => {
               </Form.Item>
           </Form>
           </Col>
-            {notes.map((nota) => (
-                <Col key={nota.id} onClick={()=> removerNota(nota.id)} className='boxAdd'>
+            {notes.map((nota, index) => (
+                <Col key={index} onClick={()=> removerNota(index)} className='boxAdd'>
                   <p>{nota.name}</p>
                 </Col>
             ))}
